@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Cette page est un formulaire d'inscription de DJ">
-    <meta name="keywords" content="DJ, Inscription, Formulaire">
+    <meta name="description" content="Raccourcisseur d'URL simple et efficace">
+    <meta name="keywords" content="URL, Raccourcisseur, Lien">
 
     <meta name="author" content="FIEVET Killian">
 
@@ -17,6 +17,7 @@
     <meta name="robots" content="noindex, nofollow">
 
     <title>Lien</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <style>
     /* html {
