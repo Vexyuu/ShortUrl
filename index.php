@@ -2,8 +2,11 @@
     require_once "./database.php";
     require_once "./compteur.php";
 
-    $shortUrlDisplay = null;
-    $errorMessage = null;
+    $shortUrlDisplay = $_SESSION['success'] ?? null;
+    $errorMessage = $_SESSION['error'] ?? null;
+
+    // Suppression des messages de la session pour qu'ils ne s'affichent qu'une fois
+    unset($_SESSION['success'], $_SESSION['error']);
 
     // --- LOGIQUE DE REDIRECTION ---
     // Si un code est fourni en paramètre GET, on redirige immédiatement
@@ -23,36 +26,27 @@
     }
 
     // --- LOGIQUE DE CRÉATION (POST) ---
-    // Si le formulaire est envoyé via POST
     if (isset($_POST['url']) && !empty($_POST['url'])) {
         $url = $_POST['url'];
         
-        // Validation basique de l'URL
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
-            // Rajouter http:// si absent
-            if (strpos($url, 'http') !== 0) {
-                $url = 'http://' . $url;
-            }
-        }
+        // Génération simplifiée avec crypt() et nettoyage (que de l'alphanumérique)
+        $hash = crypt($url, rand());
+        $newUrlCode = substr(preg_replace('/[^a-zA-Z0-9]/', '', $hash), 0, 8);
 
-        if (filter_var($url, FILTER_VALIDATE_URL)) {
-            // Générer un code aléatoire plus robuste (8 caractères hexadécimaux)
-            $newUrlCode = bin2hex(random_bytes(4));
-
-            // Insérer dans la base de données
-            try {
-                $stmt = $dbb->prepare("INSERT INTO url (long_url, court_url) VALUES (:url, :newUrl)");
-                $stmt->bindParam(':url', $url, PDO::PARAM_STR);
-                $stmt->bindParam(':newUrl', $newUrlCode, PDO::PARAM_STR);
-                $stmt->execute();
-                
-                $shortUrlDisplay = $newUrlCode;
-            } catch (PDOException $e) {
-                $errorMessage = "Erreur lors de la création du lien.";
-            }
-        } else {
-            $errorMessage = "L'URL fournie n'est pas valide.";
+        try {
+            $stmt = $dbb->prepare("INSERT INTO url (long_url, court_url) VALUES (:url, :newUrl)");
+            $stmt->bindParam(':url', $url, PDO::PARAM_STR);
+            $stmt->bindParam(':newUrl', $newUrlCode, PDO::PARAM_STR);
+            $stmt->execute();
+            
+            $_SESSION['success'] = $newUrlCode;
+        } catch (PDOException $e) {
+            $_SESSION['error'] = "Erreur lors de la création du lien.";
         }
+        
+        // Redirection systématique (Pattern PRG)
+        header("Location: index.php");
+        exit();
     }
 
     // Déterminer l'URL de base pour l'affichage
@@ -61,7 +55,7 @@
     $path = dirname($_SERVER['PHP_SELF']);
     $baseUrl = $protocol . "://" . $host . rtrim($path, '/\\') . "/";
 
-    include "./Header.php";
+    include "./header.php";
 ?>
 
 <body>

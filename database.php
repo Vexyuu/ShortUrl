@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $username = "root";
-$password = "root"; // Laisser vide si pas de mot de passe
+$password = ""; // Laisser vide si pas de mot de passe
 $database = "link";
 
 try {
@@ -11,4 +11,3 @@ try {
     print "Error!: " . $e->getMessage() . "<br>";
     die();
 }
-
