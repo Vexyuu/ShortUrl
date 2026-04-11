@@ -7,48 +7,36 @@
 
     unset($_SESSION['success'], $_SESSION['error']);
 
-    if (isset($_GET['code']) && !empty($_GET['code'])) {
-        $code = $_GET['code'];
-        $stmt = $dbb->prepare("SELECT long_url FROM url WHERE court_url = :code");
-        $stmt->bindParam(':code', $code, PDO::PARAM_STR);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    // --- REDIRECTION ---
+    if (!empty($_GET['code'])) {
+        $stmt = $dbb->prepare("SELECT long_url FROM url WHERE court_url = ?");
+        $stmt->execute([$_GET['code']]);
+        if ($longUrl = $stmt->fetchColumn()) {
+            header("Location: $longUrl");
+            exit;
+        }
+        $errorMessage = "URL raccourcie non trouvée.";
+    }
+
+    // --- CRÉATION (POST) ---
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
+        $url = $_POST['url'];
+        $hash = crypt($url, rand());
+        $newUrlCode = substr(preg_replace('/[^a-zA-Z0-9]/', '', $hash), 0, 8);
+
+        try {
+            $stmt = $dbb->prepare("INSERT INTO url (long_url, court_url) VALUES (?, ?)");
+            $stmt->execute([$url, $newUrlCode]);
+            $_SESSION['success'] = $newUrlCode;
+        } catch (PDOException $e) {
+            $_SESSION['error'] = "Erreur lors de la création du lien.";
+        }
         
-        if ($result) {
-            header("Location: " . $result['long_url']);
-            exit();
-        } else {
-            $errorMessage = "URL raccourcie non trouvée.";
-        }
+        header("Location: index.php");
+        exit;
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $url = $_POST['url'] ?? '';
-
-        if (!empty($url)) {
-            $hash = crypt($url, rand());
-            $newUrlCode = substr(preg_replace('/[^a-zA-Z0-9]/', '', $hash), 0, 8);
-
-            try {
-                $stmt = $dbb->prepare("INSERT INTO url (long_url, court_url) VALUES (:url, :newUrl)");
-                $stmt->bindParam(':url', $url, PDO::PARAM_STR);
-                $stmt->bindParam(':newUrl', $newUrlCode, PDO::PARAM_STR);
-                $stmt->execute();
-                
-                $_SESSION['success'] = $newUrlCode;
-            } catch (PDOException $e) {
-                $_SESSION['error'] = "Erreur lors de la création du lien.";
-            }
-            
-            header("Location: index.php");
-            exit();
-        }
-    }
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-    $host = $_SERVER['HTTP_HOST'];
-    $path = dirname($_SERVER['PHP_SELF']);
-    $baseUrl = $protocol . "://" . $host . rtrim($path, '/\\') . "/";
-
+    $baseUrl = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . rtrim(dirname($_SERVER['PHP_SELF']), '/\\') . "/";
     include "./header.php";
 ?>
 
