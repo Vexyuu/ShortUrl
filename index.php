@@ -5,11 +5,8 @@
     $shortUrlDisplay = $_SESSION['success'] ?? null;
     $errorMessage = $_SESSION['error'] ?? null;
 
-    // Suppression des messages de la session pour qu'ils ne s'affichent qu'une fois
     unset($_SESSION['success'], $_SESSION['error']);
 
-    // --- LOGIQUE DE REDIRECTION ---
-    // Si un code est fourni en paramètre GET, on redirige immédiatement
     if (isset($_GET['code']) && !empty($_GET['code'])) {
         $code = $_GET['code'];
         $stmt = $dbb->prepare("SELECT long_url FROM url WHERE court_url = :code");
@@ -25,31 +22,28 @@
         }
     }
 
-    // --- LOGIQUE DE CRÉATION (POST) ---
-    if (isset($_POST['url']) && !empty($_POST['url'])) {
-        $url = $_POST['url'];
-        
-        // Génération simplifiée avec crypt() et nettoyage (que de l'alphanumérique)
-        $hash = crypt($url, rand());
-        $newUrlCode = substr(preg_replace('/[^a-zA-Z0-9]/', '', $hash), 0, 8);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $url = $_POST['url'] ?? '';
 
-        try {
-            $stmt = $dbb->prepare("INSERT INTO url (long_url, court_url) VALUES (:url, :newUrl)");
-            $stmt->bindParam(':url', $url, PDO::PARAM_STR);
-            $stmt->bindParam(':newUrl', $newUrlCode, PDO::PARAM_STR);
-            $stmt->execute();
+        if (!empty($url)) {
+            $hash = crypt($url, rand());
+            $newUrlCode = substr(preg_replace('/[^a-zA-Z0-9]/', '', $hash), 0, 8);
+
+            try {
+                $stmt = $dbb->prepare("INSERT INTO url (long_url, court_url) VALUES (:url, :newUrl)");
+                $stmt->bindParam(':url', $url, PDO::PARAM_STR);
+                $stmt->bindParam(':newUrl', $newUrlCode, PDO::PARAM_STR);
+                $stmt->execute();
+                
+                $_SESSION['success'] = $newUrlCode;
+            } catch (PDOException $e) {
+                $_SESSION['error'] = "Erreur lors de la création du lien.";
+            }
             
-            $_SESSION['success'] = $newUrlCode;
-        } catch (PDOException $e) {
-            $_SESSION['error'] = "Erreur lors de la création du lien.";
+            header("Location: index.php");
+            exit();
         }
-        
-        // Redirection systématique (Pattern PRG)
-        header("Location: index.php");
-        exit();
     }
-
-    // Déterminer l'URL de base pour l'affichage
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
     $host = $_SERVER['HTTP_HOST'];
     $path = dirname($_SERVER['PHP_SELF']);
