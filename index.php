@@ -53,19 +53,16 @@
             </form>
 
             <?php if ($errorMessage): ?>
-                <div class="result-box" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3);">
-                    <p style="color: #ef4444;"><strong>Erreur :</strong> <?php echo htmlspecialchars($errorMessage); ?></p>
+                <div class="result-box error">
+                    <p><strong>Erreur :</strong> <?php echo htmlspecialchars($errorMessage); ?></p>
                 </div>
             <?php endif; ?>
 
             <?php if ($shortUrlDisplay): ?>
-                <div class="result-box">
-                    <p>
-                    <strong>Succès ! Votre lien est prêt : <br>
-                    <a href="<?php echo buildShortUrl($shortUrlDisplay); ?>" target="_blank" class="short-url" id="shortened-link"><?php echo buildShortUrl($shortUrlDisplay); ?></a>
-                    </strong>
-                    </p>
-                    <p style="font-size: 0.9em; color: var(--text-muted);">Vous pouvez maintenant partager ce lien.</p>
+                <div class="result-box success">
+                    <p><strong>Succès ! Votre lien est prêt :</strong></p>
+                    <a href="<?php echo buildShortUrl($shortUrlDisplay); ?>" target="_blank"><?php echo buildShortUrl($shortUrlDisplay); ?></a>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Vous pouvez partager ce lien.</p>
                 </div>
             <?php endif; ?>
 

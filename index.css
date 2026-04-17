@@ -51,6 +51,27 @@ h3{
     font-style: italic;
 }
 
+.result-box {
+    margin: 20px auto;
+    padding: 15px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+    border: 2px solid;
+}
+
+.result-box.success {
+    background-color: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.result-box.error {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
 form {
     width: 40%; 
     margin: 0 auto; 
