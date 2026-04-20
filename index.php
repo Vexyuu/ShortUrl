@@ -33,22 +33,20 @@
 
 <body>
     <header class="navbar">
-        <nav role="navigation">
+        <nav role="navigation" class="container">
             <a href="#">Accueil</a>
             <a href="#">Nos actus</a>
             <a href="#">Nous contacter</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Shortify Your Links</h1>
-        <h3> Entrez ci-dessous un lien que vous trouvez trop long afin que notre raccourcisseur vous aide ! </h3>
+    <main class="container">
+        <h1>Raccourcissez vos liens</h1>
+        <h3>Entrez ci-dessous un lien que vous trouvez trop long afin que notre raccourcisseur vous aide !</h3>
 
-            
+        <div class="card">
             <form action="index.php" method="POST">
-                <!--<label for="url-input">Entrez votre lien :</label>-->
                 <input type="text" id="url-input" name="url" placeholder="https://www.exemple.com" required>
-                <br/>
                 <button type="submit">Générer le lien court</button>
             </form>
 
@@ -62,18 +60,21 @@
                 <div class="result-box success">
                     <p><strong>Succès ! Votre lien est prêt :</strong></p>
                     <a href="<?php echo buildShortUrl($shortUrlDisplay); ?>" target="_blank"><?php echo buildShortUrl($shortUrlDisplay); ?></a>
-                    <p style="font-size: 0.9em; margin-top: 10px;">Vous pouvez partager ce lien.</p>
+                    <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.7;">Vous pouvez partager ce lien n'importe où.</p>
                 </div>
             <?php endif; ?>
+        </div>
 
-            <hr>
+        <hr>
 
         <div class="logos">
             <p>Ce service a été utilisé <span id="visites"><?php echo $nb_visites; ?></span> fois par les employés des entreprises suivantes : </p>
-            <img src="./images/universite-paris-1-pantheon-sorbonne.webp" alt="logo Paris1">
-            <img src="./images/Banijay-France.webp" alt="logo Banijay">
-            <img src="./images/BMW_indigo.jpg" alt="logo BMW">
-            <img src="./images/Audiens.png" alt="logo Audiens">
+            <div class="logo-grid">
+                <img src="./images/universite-paris-1-pantheon-sorbonne.webp" alt="logo Paris1">
+                <img src="./images/Banijay-France.webp" alt="logo Banijay">
+                <img src="./images/BMW_indigo.jpg" alt="logo BMW">
+                <img src="./images/Audiens.png" alt="logo Audiens">
+            </div>
         </div>
     </main>
 
