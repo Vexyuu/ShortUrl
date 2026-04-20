@@ -1,7 +1,8 @@
 <?php
 $host = "localhost";
 $username = "root";
-$password = "KNR@2005!"; // Laisser vide si pas de mot de passe | SonarQube oblige un mot de passe pour la qualimétrie du code
+// En production, le mdp doit être secret et stocké dans une variable d'environnement ou un fichier .env non indexé pour éviter le "hardcoding"
+$password = "Projets-TD-INF7-Securise!"; // Vide si pas de mdp | SonarQube oblige un mdp fort pour la qualimétrie du code
 $database = "link";
 
 try {
