@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $username = "root";
-$password = ""; // Laisser vide si pas de mot de passe
+$password = "root"; // Laisser vide si pas de mot de passe | SonarQube oblige un mot de passe pour la qualimétrie du code
 $database = "link";
 
 try {

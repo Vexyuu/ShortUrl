@@ -18,7 +18,8 @@
     <meta name="author" content="FIEVET Killian | Nayiri KEBBA | Rafael GHOUAR-TOUSSAINT">
 
     <!-- 6. Refresh -->
-    <meta http-equiv="refresh" content="180; url=index.php">
+    <!-- SonarQube bloque cette balise car elle est considérée comme une mauvaise pratique SEO -->
+    <!-- <meta http-equiv="refresh" content="180; url=index.php"> -->
 
     <!-- 7. Cache-Control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">

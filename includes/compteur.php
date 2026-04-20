@@ -9,4 +9,3 @@ $querySelect->execute();
 $resultat = $querySelect->fetch();
 
 $nb_visites = $resultat['visites'];
-?>

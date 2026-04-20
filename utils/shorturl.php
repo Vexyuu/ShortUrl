@@ -40,4 +40,3 @@ function createShortUrl($url, $dbb) {
         return ['error' => "Erreur lors de la création du lien."];
     }
 }
-?>
