@@ -1,7 +1,7 @@
 <?php
     // Chargement des fichiers externes
-    require_once "./database.php";
-    require_once "./compteur.php";
+    require_once "./includes/database.php";
+    require_once "./includes/compteur.php";
     require_once "./utils/shorturl.php";
 
     $shortUrlDisplay = null;
@@ -28,7 +28,7 @@
     }
 
     // Chargement de la balise <head> et du début de la structure HTML.
-    include "./header.php";
+    include "./includes/header.php";
 ?>
 
 <body>
@@ -69,7 +69,7 @@
             <hr>
 
         <div class="logos">
-            <p>Ce service a été utilisé <span id="visites"><?php echo $visites; ?></span> fois par les employés des entreprises suivantes : </p>
+            <p>Ce service a été utilisé <span id="visites"><?php echo $nb_visites; ?></span> fois par les employés des entreprises suivantes : </p>
             <img src="./images/universite-paris-1-pantheon-sorbonne.webp" alt="logo Paris1">
             <img src="./images/Banijay-France.webp" alt="logo Banijay">
             <img src="./images/BMW_indigo.jpg" alt="logo BMW">

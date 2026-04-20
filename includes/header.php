@@ -8,7 +8,7 @@
     <meta name="description" content="Raccourcisseur d'URL simple et efficace">
     <meta name="keywords" content="URL, Raccourcisseur, Lien">
 
-    <meta name="author" content="FIEVET Killian">
+    <meta name="author" content="FIEVET Killian | Nayiri KEBBA | Rafael GHOUAR-TOUSSAINT">
 
     <meta http-equiv="refresh" content="180; url=index.php">
 
@@ -17,13 +17,5 @@
     <meta name="robots" content="noindex, nofollow">
 
     <title>Lien</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<style>
-    /* html {
-        display: flex;
-        flex-direction: column;
-        width: 300px;
-        margin: auto;
-    } */
-</style>
