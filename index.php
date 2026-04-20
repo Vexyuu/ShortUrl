@@ -28,7 +28,7 @@
     }
 
     // Chargement de la balise <head> et du début de la structure HTML.
-    include "./includes/header.php";
+    include_once "./includes/header.php";
 ?>
 
 <body>
