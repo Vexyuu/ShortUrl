@@ -19,7 +19,6 @@
 
     <!-- 6. Refresh -->
     <!-- SonarQube bloque cette balise car elle est considérée comme une mauvaise pratique SEO -->
-    <!-- <meta http-equiv="refresh" content="180; url=index.php"> -->
 
     <!-- 7. Cache-Control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
