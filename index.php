@@ -27,6 +27,8 @@
         }
     }
 
+    $history = getHistory($dbb, 5);
+
     // Chargement de la balise <head> et du début de la structure HTML.
     include_once "./includes/header.php";
 ?>
@@ -64,6 +66,25 @@
                 </div>
             <?php endif; ?>
         </div>
+
+        <?php if ($history): ?>
+            <div class="card history">
+                <h2>Derniers liens créés</h2>
+                <ul class="history-list">
+                    <?php foreach ($history as $row): ?>
+                        <li>
+                            <div class="history-item">
+                                <span class="long-url"><?php echo htmlspecialchars($row['long_url']); ?></span>
+                                <span class="arrow">&rarr;</span>
+                                <a href="<?php echo htmlspecialchars(buildShortUrl($row['court_url'])); ?>" target="_blank">
+                                    <?php echo htmlspecialchars(buildShortUrl($row['court_url'])); ?>
+                                </a>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
         <hr>
 

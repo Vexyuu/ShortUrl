@@ -32,6 +32,12 @@
     <!-- 10. Robots -->
     <meta name="robots" content="index, follow">
 
+    <!-- 11. OpenGraph (Réseaux Sociaux) -->
+    <meta property="og:title" content="Shortify - Raccourcisseur d'URL simple et rapide">
+    <meta property="og:description" content="Transformez vos liens longs en liens courts faciles à partager en un clic.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+
     <title>Shortify - Votre raccourcisseur d'URL simple et rapide</title>
 
     <!-- Google Fonts -->

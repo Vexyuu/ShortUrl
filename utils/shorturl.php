@@ -48,3 +48,14 @@ function createShortUrl($url, $dbb) {
         return ['error' => "Erreur lors de la création du lien."];
     }
 }
+
+function getHistory($dbb, $limit = 5) {
+    try {
+        $stmt = $dbb->prepare("SELECT long_url, court_url FROM url ORDER BY id DESC LIMIT :limit");
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return [];
+    }
+}

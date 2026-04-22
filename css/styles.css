@@ -198,6 +198,29 @@ hr {
     max-width: 180px;
 }
 
+.history {
+    margin-top: 20px;
+    text-align: left;
+}
+.history-list {
+    list-style: none;
+    padding: 0;
+}
+.history-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+.long-url {
+    color: #666;
+    display: inline-block;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
 /* RESPONSIVE */
 @media (max-width: 640px) {
     h1 { font-size: 2rem; }
