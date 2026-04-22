@@ -59,7 +59,7 @@
             <?php if ($shortUrlDisplay): ?>
                 <div class="result-box success">
                     <p><strong>Succès ! Votre lien est prêt :</strong></p>
-                    <a href="<?php echo buildShortUrl($shortUrlDisplay); ?>" target="_blank"><?php echo buildShortUrl($shortUrlDisplay); ?></a>
+                    <a href="<?php echo htmlspecialchars(buildShortUrl($shortUrlDisplay)); ?>" target="_blank"><?php echo htmlspecialchars(buildShortUrl($shortUrlDisplay)); ?></a>
                     <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.7;">Vous pouvez partager ce lien n'importe où.</p>
                 </div>
             <?php endif; ?>

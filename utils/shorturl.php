@@ -15,8 +15,7 @@ function buildShortUrl($code) {
     $path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
     
     // URL finale
-    $baseUrl = $protocol . "://" . $host . $path . "/index.php";
-    return $baseUrl . "?q=" . htmlspecialchars($code);
+    return "$protocol://$host$path/index.php?q=" . urlencode($code);
 }
 
 function redirectToUrl($code, $dbb) {
