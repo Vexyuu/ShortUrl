@@ -28,6 +28,9 @@ function redirectToUrl($code, $dbb) {
     if ($result) {
         header("Location: " . $result['long_url']);
         exit();
+    } else {
+        header("Location: notfound.php");
+        exit();
     }
 }
 

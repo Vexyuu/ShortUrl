@@ -1,4 +1,4 @@
-/* Design Humain & Épuré */
+/* VARIABLES */
 :root {
     --text: #334155;
     --text-light: #64748b;
@@ -18,27 +18,22 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', sans-serif;
     color: var(--text);
-    background-color: #DCDCF2;
+    background-color: #f1f5f9;
     line-height: 1.6;
 }
 
-/* UTILS */
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 0 24px;
 }
 
-/* NAVIGATION */
 .navbar {
     background: var(--couleur-blanche);
     border-bottom: 1px solid var(--couleur-bordure);
     padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 10;
 }
 
 .navbar nav {
@@ -52,14 +47,12 @@ body {
     text-decoration: none;
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
-    transition: color 0.2s;
 }
 
 .navbar a:hover {
     color: var(--couleur-principale);
 }
 
-/* HEADER & TITLES */
 main.container {
     padding: 120px 24px 60px !important;
     text-align: center;
@@ -80,13 +73,12 @@ h3 {
     margin-bottom: 3rem;
 }
 
-/* LA CARTE (Cœur de l'app) */
 .card {
     background: var(--couleur-blanche);
     border: 1px solid var(--couleur-bordure);
     border-radius: var(--radius);
     padding: 3rem;
-    box-shadow: var(--shadow);
+    margin-bottom: 20px;
 }
 
 form {
@@ -108,33 +100,24 @@ input {
     transition: all 0.2s;
 }
 
-input:focus {
-    outline: none;
-    border-color: var(--couleur-principale);
-    background: var(--couleur-blanche);
-    box-shadow: 0 0 0 4px var(--couleur-secondaire);
-}
-
-button {
+button,
+.button {
+    display: inline-block;
     background: var(--couleur-principale);
     color: var(--couleur-blanche);
-    padding: 1rem;
+    padding: 0.8rem 1.5rem;
     border: none;
     border-radius: 14px;
     font-size: 1rem;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
-    transition: all 0.2s;
+    text-decoration: none;
 }
 
-button:hover {
+button:hover,
+.button:hover {
     background: #4338ca;
-    transform: scale(1.02);
-}
-
-button:active {
-    transform: scale(0.98);
 }
 
 /* MESSAGES */
@@ -166,14 +149,6 @@ button:active {
     word-break: break-all;
 }
 
-/* PARTENAIRES */
-hr {
-    border: 0;
-    height: 1px;
-    background: var(--border);
-    margin: 4rem 0;
-}
-
 .logos p {
     color: var(--text-light);
     font-size: 0.9rem;
@@ -187,10 +162,10 @@ hr {
 
 .logo-grid {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
     align-items: center;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .logo-grid img {
@@ -198,19 +173,17 @@ hr {
     max-width: 180px;
 }
 
-.history {
-    margin-top: 20px;
-    text-align: left;
-}
 .history-list {
     list-style: none;
     padding: 0;
 }
+
 .history-item {
     padding: 10px;
     border-bottom: 1px solid #eee;
     font-size: 0.9rem;
 }
+
 .long-url {
     color: #666;
     display: inline-block;
@@ -223,8 +196,17 @@ hr {
 
 /* RESPONSIVE */
 @media (max-width: 640px) {
-    h1 { font-size: 2rem; }
-    .card { padding: 2rem 1.5rem; }
-    .logo-grid { gap: 2rem; }
-    .logo-grid img { max-width: 140px; }
+    h1 {
+        font-size: 2rem;
+    }
+
+    .logo-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .logo-grid img {
+        max-width: 120px;
+    }
 }

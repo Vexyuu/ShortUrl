@@ -86,8 +86,6 @@
             </div>
         <?php endif; ?>
 
-        <hr>
-
         <div class="logos">
             <p>Ce service a été utilisé <span id="visites"><?php echo $nb_visites; ?></span> fois par les employés des entreprises suivantes : </p>
             <div class="logo-grid">
