@@ -11,8 +11,8 @@
         $shortUrlDisplay = $_GET['success'];
     }
 
-    if (isset($_GET['code']) && !empty($_GET['code'])) {
-        redirectToUrl($_GET['code'], $dbb);
+    if (isset($_GET['q']) && !empty($_GET['q'])) {
+        redirectToUrl($_GET['q'], $dbb);
         $errorMessage = "URL raccourcie non trouvée.";
     }
 

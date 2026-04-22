@@ -6,8 +6,17 @@ function generateShortCode($url) {
 }
 
 function buildShortUrl($code) {
-    $baseUrl = "http://localhost/ShortUrl/index.php";
-    return $baseUrl . "?code=" . htmlspecialchars($code);
+    // Récupération protocole http ou https
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+    
+    $host = $_SERVER['HTTP_HOST']; // Port de l'hôte
+    
+    // Récupération chemin dynamique du dossier actuel
+    $path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+    
+    // URL finale
+    $baseUrl = $protocol . "://" . $host . $path . "/index.php";
+    return $baseUrl . "?q=" . htmlspecialchars($code);
 }
 
 function redirectToUrl($code, $dbb) {
