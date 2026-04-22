@@ -6,3 +6,11 @@ CREATE TABLE URL (
     long_url TEXT NOT NULL,
     court_url VARCHAR (30) NOT NULL
 )
+
+
+CREATE TABLE visiteurs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    visites INT NOT NULL
+);
+
+INSERT INTO visiteurs (visites) VALUES (0);
