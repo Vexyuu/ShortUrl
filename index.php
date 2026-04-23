@@ -51,16 +51,16 @@
             </form>
 
             <?php if ($errorMessage): ?>
-                <div class="result-box error">
+                <div class="result-box error" role="alert">
                     <p><strong>Erreur :</strong> <?php echo htmlspecialchars($errorMessage); ?></p>
                 </div>
             <?php endif; ?>
 
             <?php if ($shortUrlDisplay): ?>
-                <div class="result-box success">
+                <div class="result-box success" role="alert">
                     <p><strong>Voici votre lien court :</strong></p>
                     <?php $urlComplete = buildShortUrl($shortUrlDisplay); ?>
-                    <a href="<?= htmlspecialchars($urlComplete) ?>" target="_blank"><?= htmlspecialchars($urlComplete) ?></a>
+                    <a href="<?= htmlspecialchars($urlComplete) ?>" target="_blank" aria-label="Ouvrir le lien raccourci"><?= htmlspecialchars($urlComplete) ?></a>
                     <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.7;">Vous pouvez partager ce lien n'importe où.</p>
                 </div>
             <?php endif; ?>
@@ -74,7 +74,7 @@
                             <?php echo htmlspecialchars($row['long_url']); ?>
                             <span class="arrow">:</span>
                             <?php $urlComplete = buildShortUrl($row['court_url']); ?>
-                            <a href="<?= htmlspecialchars($urlComplete) ?>" target="_blank"><?= htmlspecialchars($urlComplete) ?></a>
+                            <a href="<?= htmlspecialchars($urlComplete) ?>" target="_blank" aria-label="Ouvrir le lien"><?= htmlspecialchars($urlComplete) ?></a>
                         </div>
                     <?php endforeach; ?>
             </div>
