@@ -6,16 +6,10 @@ function generateShortCode($url) {
 }
 
 function buildShortUrl($code) {
-    // Récupération protocole http ou https
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-    
+    $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http"; // Récupération du protocole http ou https
     $host = $_SERVER['HTTP_HOST']; // Port de l'hôte
-    
-    // Récupération chemin dynamique du dossier actuel
-    $path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
-    
-    // URL finale
-    return "$protocol://$host$path/index.php?q=" . urlencode($code);
+    $path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\'); // Récupération chemin dynamique du dossier actuel
+    return "$protocol://$host$path/index.php?q=" . urlencode($code); // URL finale
 }
 
 function redirectToUrl($code, $dbb) {
