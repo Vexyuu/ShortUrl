@@ -29,7 +29,6 @@
 
     $history = getHistory($dbb, 5);
 
-    // Chargement de la balise <head> et du début de la structure HTML.
     include_once "./includes/header.php";
 ?>
 
@@ -60,8 +59,9 @@
 
             <?php if ($shortUrlDisplay): ?>
                 <div class="result-box success">
-                    <p><strong>Succès ! Votre lien est prêt :</strong></p>
-                    <a href="<?php echo htmlspecialchars(buildShortUrl($shortUrlDisplay)); ?>" target="_blank"><?php echo htmlspecialchars(buildShortUrl($shortUrlDisplay)); ?></a>
+                    <p><strong>Succès ! Voici le lien court :</strong></p>
+                    <?php $urlComplete = buildShortUrl($shortUrlDisplay); ?>
+                    <a href="<?= htmlspecialchars($urlComplete) ?>" target="_blank"><?= htmlspecialchars($urlComplete) ?></a>
                     <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.7;">Vous pouvez partager ce lien n'importe où.</p>
                 </div>
             <?php endif; ?>
@@ -70,19 +70,14 @@
         <?php if ($history): ?>
             <div class="card history">
                 <h2>Derniers liens créés</h2>
-                <ul class="history-list">
                     <?php foreach ($history as $row): ?>
-                        <li>
-                            <div class="history-item">
-                                <span class="long-url"><?php echo htmlspecialchars($row['long_url']); ?></span>
-                                <span class="arrow">&rarr;</span>
-                                <a href="<?php echo htmlspecialchars(buildShortUrl($row['court_url'])); ?>" target="_blank">
-                                    <?php echo htmlspecialchars(buildShortUrl($row['court_url'])); ?>
-                                </a>
-                            </div>
-                        </li>
+                        <div class="history-item">
+                            <?php echo htmlspecialchars($row['long_url']); ?>
+                            <span class="arrow">:</span>
+                            <?php $urlComplete = buildShortUrl($row['court_url']); ?>
+                            <a href="<?= htmlspecialchars($urlComplete) ?>" target="_blank"><?= htmlspecialchars($urlComplete) ?></a>
+                        </div>
                     <?php endforeach; ?>
-                </ul>
             </div>
         <?php endif; ?>
 
