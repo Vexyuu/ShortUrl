@@ -5,7 +5,7 @@ CREATE TABLE URL (
     id INT AUTO_INCREMENT PRIMARY KEY,
     long_url TEXT NOT NULL,
     court_url VARCHAR (30) NOT NULL
-)
+);
 
 
 CREATE TABLE visiteurs (
