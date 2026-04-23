@@ -58,7 +58,7 @@
 
             <?php if ($shortUrlDisplay): ?>
                 <div class="result-box success">
-                    <p><strong>Succès ! Voici le lien court :</strong></p>
+                    <p><strong>Voici votre lien court :</strong></p>
                     <?php $urlComplete = buildShortUrl($shortUrlDisplay); ?>
                     <a href="<?= htmlspecialchars($urlComplete) ?>" target="_blank"><?= htmlspecialchars($urlComplete) ?></a>
                     <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.7;">Vous pouvez partager ce lien n'importe où.</p>
