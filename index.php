@@ -1,5 +1,4 @@
 <?php
-    // Chargement des fichiers externes
     require_once "./includes/database.php";
     require_once "./includes/compteur.php";
     require_once "./utils/shorturl.php";
